@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>📊 Student Records</h1>
+
+<h3>Total Students: {{ count }}</h3>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <div class="alert {{ category }}">{{ message }}</div>
+  {% endfor %}
+{% endwith %}
+
+<table>
+    <tr>
+        <th>Roll</th>
+        <th>Name</th>
+        <th>Total</th>
+        <th>Average</th>
+        <th>Grade</th>
+        <th>Action</th>
+    </tr>
+
+    {% for roll, data in students.items() %}
+    <tr>
+        <td>{{ roll }}</td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.total }}</td>
+        <td>{{ data.average }}</td>
+        <td class="grade {{ data.grade }}">{{ data.grade }}</td>
+        <td>
+            <a href="/delete/{{ roll }}" onclick="return confirm('Are you sure?')">
+                ❌ Delete
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/">➕ Add Another Student</a>
+
+</body>
+</html>

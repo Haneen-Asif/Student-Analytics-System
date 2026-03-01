@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Search Result{% endblock %}
+
+{% block content %}
+
+<h3>🔍 Search Result</h3>
+
+{% if student %}
+
+<table class="table table-bordered mt-3">
+
+<tr>
+<th>Roll</th>
+<th>Name</th>
+<th>Total</th>
+<th>Average</th>
+<th>CGPA</th>
+<th>Grade</th>
+</tr>
+
+<tr>
+<td>{{ roll }}</td>
+<td>{{ student.name }}</td>
+<td>{{ student.total }}</td>
+<td>{{ student.average }}</td>
+<td>{{ student.cgpa }}</td>
+<td>{{ student.grade }}</td>
+</tr>
+
+</table>
+
+{% else %}
+
+<div class="alert alert-danger">
+Student not found ❌
+</div>
+
+{% endif %}
+
+<a href="/" class="btn btn-secondary">Back to Dashboard</a>
+
+{% endblock %}

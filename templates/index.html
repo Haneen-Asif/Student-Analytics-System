@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Analytics System</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<h1>🎓 Student Analytics Dashboard</h1>
+<h3>Semester: VI</h3>
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for category, message in messages %}
+<div class="alert {{category}}">{{message}}</div>
+{% endfor %}
+{% endwith %}
+
+<!-- Search -->
+<form action="/search">
+<input type="text" name="q" placeholder="Search student...">
+<button>Search</button>
+</form>
+
+<hr>
+
+<!-- Add Student -->
+<div class="card">
+<h2>Add Student</h2>
+
+<form action="/add" method="POST">
+<input class="form-control col" name="roll" placeholder="Roll Number" required><input class="form-control col" name="name" placeholder="Name" required>
+<input class="form-control col" name="Human Computer Interaction" placeholder="Human Computer Interaction" required>
+<input class="form-control col" name="Information Security" placeholder="Information Security" required>
+<input class="form-control col" name="Mobile Application Development" placeholder="Mobile application development" required>
+<input class="form-control col" name="Desgin and Algorithm Analysis" placeholder="Desgin and Algorithm Analysis" required>
+<input class="form-control col" name="Big Data Analytics" placeholder="Big Data Analytics" required>
+
+<br><br>
+<button>Add Student</button>
+</form>
+</div>
+
+<hr>
+
+<h2>📊 Student Records</h2>
+
+<table>
+<tr>
+<th>Roll Number</th>
+<th>Name</th>
+<th>Total</th>
+<th>Average</th>
+<th>Grade</th>
+<th>Action</th>
+</tr>
+
+{% for roll,data in students.items() %}
+<tr>
+<td>{{ roll }}</td>
+<td>{{ data.name }}</td>
+<td>{{ data.total }}</td>
+<td>{{ data.average }}</td>
+<td>{{ data.grade }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
